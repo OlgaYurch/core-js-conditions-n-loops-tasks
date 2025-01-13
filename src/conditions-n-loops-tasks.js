@@ -233,13 +233,17 @@ function getIndexOf(str, letter) {
  *  12345, 6    => false
  */
 function isContainNumber(num, digit) {
-  const str = String(num);
-  for (let i = 0; i < str.length; i += 1) {
-    if (str[i] === String(digit)) {
-      return true;
-    }
+  if (num === 0) {
+    return digit === 0;
   }
-  return false;
+  if (num < 10) {
+    return num === digit;
+  }
+  const lastDigit = num % 10;
+  if (lastDigit === digit) {
+    return true;
+  }
+  return isContainNumber(Math.floor(num / 10), digit);
 }
 
 /**
